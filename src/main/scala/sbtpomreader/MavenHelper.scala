@@ -253,6 +253,7 @@ object MavenHelper {
     allDependencies.filter { dep =>
       dep.organization == pom.getGroupId
     }
+    allDependencies
   }
 
   def getPomResolvers(pom: PomModel): Seq[Resolver] = {

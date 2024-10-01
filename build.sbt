@@ -2,18 +2,20 @@ val mvnVersion = "3.9.4"
 val mvnResolverVersion = "1.9.18"
 val scala212 = "2.12.19"
 
-ThisBuild / organization := "com.github.sbt"
+ThisBuild / credentials += Credentials(Path.userHome / ".sbt" / "credentials")
+ThisBuild / organization := "com.facebook.github.sbt"
 ThisBuild / licenses := Seq("Apache-2.0" -> url("http://opensource.org/licenses/Apache-2.0"))
 ThisBuild / developers := List(Developer("", "", "", url("https://github.com/sbt/sbt-pom-reader/graphs/contributors")))
 ThisBuild / homepage := Some(url("https://github.com/sbt/sbt-pom-reader"))
 ThisBuild / dynverSonatypeSnapshots := true
 ThisBuild / version := {
   val orig = (ThisBuild / version).value
-  if (orig.endsWith("-SNAPSHOT")) "2.5.0-SNAPSHOT"
+  if (orig.endsWith("-SNAPSHOT")) "2.5.0-FB-SNAPSHOT"
   else orig
 }
 ThisBuild / scalaVersion := scala212
 ThisBuild / crossScalaVersions := Seq(scala212)
+ThisBuild / publishTo := Some("Facebook Maven Repo" at "https://maven.thefacebook.com/nexus/content/groups/public")
 
 lazy val root = (project in file("."))
   .enablePlugins(SbtPlugin)
@@ -47,4 +49,5 @@ lazy val root = (project in file("."))
     scriptedLaunchOpts ++= Seq("-Dplugin.version=" + version.value)
     scriptedBufferLog := true
     scriptedSbt := "1.9.9"
+    publishTo := Some("Facebook Maven Repo" at "https://maven.thefacebook.com/nexus/content/repositories/snapshots")
   })

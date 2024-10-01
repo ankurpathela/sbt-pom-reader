@@ -29,7 +29,8 @@ class MavenPomResolver(system: RepositorySystem, localRepo: File) {
 
   private val defaultRepositories: Seq[RemoteRepository] =
     Seq(
-      new RemoteRepository.Builder("central", "default", "https://repo.maven.apache.org/maven2").build()
+       new RemoteRepository.Builder("central", "default", "https://repo.maven.apache.org/maven2").build(),
+       new RemoteRepository.Builder("mavenproxy", "default", "https://maven.thefacebook.com/nexus/content/groups/public").build()
     )
 
   // TODO - Add repositories from the pom...
